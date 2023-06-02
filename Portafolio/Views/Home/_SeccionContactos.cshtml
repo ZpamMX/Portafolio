@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Contacto> 
+
+@if (Model is not null)
+{
+    <div class="text-center p-2">
+        <h2>Contactos:</h2>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-3 g-4">
+            @foreach(var contacto in Model)
+            {
+                <div class="mt-2">
+                    <p> 
+                        @contacto.Nombre
+                        @contacto.ApellidoMaterno
+                        @contacto.ApellidoPaterno
+                        @contacto.Telefono
+                    </p>
+                </div>
+            }
+          </div>
+    </div>
+}
