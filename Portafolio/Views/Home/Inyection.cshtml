@@ -1,0 +1,67 @@
+﻿@model HomeIndexVM
+@{
+    ViewData["Title"] = "Ejemplo Inyeccion";
+}
+
+<div><h2>Este es un ejemplo de los 3 tipos de inyeccion que existen:</h2></div>
+<h2> Ejemplo 1</h2>
+<table class="table w-50">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">GUID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th class="table-success" scope="row">1</th>
+            <td class="table-success">Transitorio:</td>
+            <td class="table-success">@Model.EjemploGuid_1.Transitorio</td> 
+        </tr>
+        <tr>
+            <th class="table-primary" scope="row">2</th>
+            <td class="table-primary">Delimitado</td>
+            <td class="table-primary">@Model.EjemploGuid_1.Delimitado</td>
+        </tr>
+        <tr>
+            <th class="table-danger" scope="row">3</th>
+            <td class="table-danger">Único</td>
+            <td class="table-danger">@Model.EjemploGuid_1.Unico</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="table-responsive">
+<h2> Ejemplo 2</h2>
+    <table class="table w-50">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">GUID</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th class="table-success" scope="row">1</th>
+            <td class="table-success">Transitorio:</td>
+            <td class="table-success">@Model.EjemploGuid_2.Transitorio</td>
+
+        </tr>
+        <tr>
+            <th class="table-primary" scope="row">2</th>
+            <td class="table-primary">Delimitado</td>
+            <td class="table-primary">@Model.EjemploGuid_2.Delimitado</td>
+
+        </tr>
+        <tr>
+            <th class="table-danger" scope="row">3</th>
+            <td class="table-danger">Único</td>
+            <td class="table-danger">@Model.EjemploGuid_2.Unico</td>
+        </tr>
+    </tbody>
+</table>
+</div>
