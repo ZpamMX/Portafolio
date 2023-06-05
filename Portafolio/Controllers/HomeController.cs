@@ -8,10 +8,10 @@ namespace Portafolio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly RepositorioProyectos repositorioProyectos;
-        private readonly RepositorioContactos repositorioContactos;
+        private readonly IRepositorioProyectos repositorioProyectos;
+        private readonly IRepositorioContactos repositorioContactos;
 
-        public HomeController(ILogger<HomeController> logger, RepositorioProyectos repositorioProyectos, RepositorioContactos repositorioContactos)
+        public HomeController(ILogger<HomeController> logger, IRepositorioProyectos repositorioProyectos, IRepositorioContactos repositorioContactos)
         {
             _logger = logger;
             this.repositorioProyectos = repositorioProyectos;
@@ -26,7 +26,7 @@ namespace Portafolio.Controllers
             return View(modelo);
         }
 
-        public IActionResult Menu()
+        public IActionResult Bootstrap()
         {
             return View();
         }

@@ -2,21 +2,24 @@
 
 @if (Model is not null)
 {
-    <div class="text-center p-2">
-        <h2>Contactos:</h2>
+    <div class="text-center pt-5">
+        <h2>Contacta con nuestros agentes:</h2>
     </div>
-
     <div class="container">
         <div class="row row-cols-1 row-cols-3 g-4">
             @foreach(var contacto in Model)
             {
-                <div class="mt-2">
-                    <p> 
-                        @contacto.Nombre
-                        @contacto.ApellidoMaterno
-                        @contacto.ApellidoPaterno
-                        @contacto.Telefono
-                    </p>
+                var linkTel = "https://api.whatsapp.com/send?phone=" + contacto.Telefono.Replace(" ","");
+                <div class="col">
+                    <div class="card h-10">
+                        <img src="@contacto.ImagenURL" class="card-img-top" alt="imagen proyecto" />
+                        <div class="card-body">
+                            <h3><img src="/Imagenes/whatsappIcon.png" height="32" width="32" /> <a href=@linkTel>@contacto.Telefono</a></h3>
+                            <h5>@contacto.Nombre @contacto.ApellidoPaterno @contacto.ApellidoMaterno</h5>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
                 </div>
             }
           </div>
