@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioProyectos, RepositorioProyectos>();
 builder.Services.AddTransient<IRepositorioContactos, RepositorioContactos>();
+builder.Services.AddTransient<IServicioEmail, ServicioEmailSendGrid>();
+
+
 
 //probando tipos de inyeccion:
 builder.Services.AddTransient<ServicioTransitorio>();

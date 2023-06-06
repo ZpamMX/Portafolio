@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace Portafolio.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,6 +17,7 @@ namespace Portafolio.Controllers
         private readonly ServicioUnico servicioUnico2;
         private readonly ServicioTransitorio servicioTransitorio2;
         private readonly ServicioDelimitado servicioDelimitado2;
+        private readonly IServicioEmail servicioEmail;
 
         public HomeController(ILogger<HomeController> logger, 
             IRepositorioProyectos repositorioProyectos, 
@@ -25,8 +27,8 @@ namespace Portafolio.Controllers
             ServicioDelimitado servicioDelimitado,
             ServicioUnico servicioUnico2,
             ServicioTransitorio servicioTransitorio2,
-            ServicioDelimitado servicioDelimitado2
-
+            ServicioDelimitado servicioDelimitado2,
+            IServicioEmail servicioEmail
             )
 
         {
@@ -39,12 +41,20 @@ namespace Portafolio.Controllers
             this.servicioUnico2 = servicioUnico2;
             this.servicioTransitorio2 = servicioTransitorio2;
             this.servicioDelimitado2 = servicioDelimitado2;
+            this.servicioEmail = servicioEmail;
         }
 
         public IActionResult Index()
         {
+            _logger.LogTrace("Este es un mensaje de trace");
+            _logger.LogDebug("Este es un mensaje de debug");
+            _logger.LogInformation("Este es un mensaje de informacion");
+            _logger.LogWarning("Este es un mensaje de warning");
+            _logger.LogError("Este es un mensaje de error");
+            _logger.LogCritical("Este es un mensaje de critical");
+
             var contactos = repositorioContactos.ObtenerContactos().Take(3).ToList();
-            var proyectos = repositorioProyectos.ObtenerProyectos().Take(4).ToList();
+            var proyectos = repositorioProyectos.ObtenerProyectos().Take(3).ToList();
 
             var guidViewModel = new EjemploGuidVM()
             {
@@ -100,6 +110,31 @@ namespace Portafolio.Controllers
             };
             return View(modelo);
         }
+
+        public IActionResult Proyectos()
+        {
+            var proyectos = repositorioProyectos.ObtenerProyectos();
+            return View(proyectos);
+        }
+        [HttpGet]
+        public IActionResult Contacto()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task <IActionResult> Contacto(ContactoVM contactoVM)
+        {
+            await servicioEmail.Enviar(contactoVM);
+            return RedirectToAction("Gracias");
+        }
+
+        public IActionResult Gracias()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
